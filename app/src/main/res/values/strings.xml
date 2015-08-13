@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Furin</string>
+
+    <string name="hello_world">風鈴がなるよ</string>
+    <string name="ring_button">風鈴を鳴らす</string>
+    <string name="action_settings">風鈴を買う</string>
+    <string name="title_activity_buy">BuyActivity</string>
+</resources>
