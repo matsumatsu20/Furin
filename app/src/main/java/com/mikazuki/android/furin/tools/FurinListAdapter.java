@@ -8,19 +8,23 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.mikazuki.android.furin.R;
 import com.mikazuki.android.furin.entity.FurinList;
 
 import java.util.List;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by matsuMac on 2015/08/10.
  */
 public class FurinListAdapter extends BaseAdapter {
-    private LayoutInflater mLayoutInflater;
-    private Context mContext;
-    private List<FurinList> mItems;
+    public LayoutInflater mLayoutInflater;
+    public Context mContext;
+    public List<FurinList> mItems;
 
-    FurinListAdapter(Context context, List<FurinList> items) {
+    public FurinListAdapter(Context context, List<FurinList> items) {
         mContext = context;
         mItems = items;
         mLayoutInflater = LayoutInflater.from(context);
@@ -43,14 +47,28 @@ public class FurinListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
         if(convertView == null) {
-            convertView = mLayoutInflater.inflate(android.R.layout.list_content, parent,false);
+            convertView = mLayoutInflater.inflate(R.layout.list_item, parent,false);
+            holder = new ViewHolder(convertView);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
 
         FurinList item = mItems.get(position);
 
-        ((TextView)convertView).setText(item.getName());
+        holder.userName.setText(item.getName());
 
         return convertView;
+    }
+
+    static class ViewHolder {
+        @Bind(R.id.userName)
+        TextView userName;
+
+        public ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 }
